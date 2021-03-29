@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Text;
 
 namespace kakaoImti
 {
@@ -16,9 +17,8 @@ namespace kakaoImti
         /// 
 
         public const int WM_LBUTTONDOWN = 513;
-        public const int WM_KEYDOWN = 256;
-        public const int WM_KEYUP = 257;
-
+        public const int WM_KEYDOWN = 0x100;
+        public const int WM_KEYUP = 0x101;
         public const int VK_TAB = 0x09;
 
         [STAThread]
@@ -26,23 +26,40 @@ namespace kakaoImti
         {
 
 
-            int talking = Connect.FindWindow(null, "박동환");
-            Console.WriteLine(talking);
+            IntPtr talking = Connect.FindWindow(null, "박동환");
+            Console.WriteLine(talking.ToString("X"));
             
 
-            if(talking > 0)
+            if(talking != IntPtr.Zero)
             {
-                Thread.Sleep(2000);
+                Thread.Sleep(4000);
                 Console.WriteLine("start");
 
-                int result = Connect.SendMessage(talking, WM_KEYDOWN, Convert.ToInt32(Keys.Tab), 0);
-                Console.WriteLine(result);
+                IntPtr result = IntPtr.Zero;
+                do
+                {
+                    StringBuilder caption = new StringBuilder(260);
+
+                    result = Connect.FindWindowEx(talking, result, null, null);
+                   
+                    if (Connect.GetClassName(result, caption, 260) > 0)
+                    {
+                        Console.WriteLine(caption);
+                    }
+
+                }
+                while (result != IntPtr.Zero);
+
 
             }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //Application.Run(new Form1());
         }
+
+     
     }
+
+
 }
