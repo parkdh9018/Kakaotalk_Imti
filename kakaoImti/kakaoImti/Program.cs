@@ -52,11 +52,10 @@ namespace kakaoImti
                 uint lpdwProcessId;
                
                 GetWindowThreadProcessId(hWnd, out lpdwProcessId);
-                
-                //Console.WriteLine(lpdwProcessId.ToString("X"));
-               
+
                 if (lpdwProcessId == pid)
                     dsProcRootWindows.Add(hWnd);
+                
             }
             return dsProcRootWindows;
         }
@@ -75,6 +74,7 @@ namespace kakaoImti
                 if (listHandle.IsAllocated)
                     listHandle.Free();
             }
+
             return result;
         }
 
@@ -91,6 +91,43 @@ namespace kakaoImti
             return true;
         }
 
+        private static List<IntPtr> FindAllWindowEx(IntPtr parent, String className, String windowName)
+        {
+            List<IntPtr> result = new List<IntPtr>();
+
+            IntPtr window = IntPtr.Zero;
+
+            do
+            {
+                window = FindWindowEx(parent, window, className, windowName);
+                if(window != IntPtr.Zero)
+                    result.Add(window);
+
+            }
+            while (window != IntPtr.Zero);
+
+            return result;
+        }
+
+        private static void PrintAllWindow(int d,IntPtr parent)
+        {
+
+
+            List<IntPtr> result = FindAllWindowEx(parent, null, null);
+
+            StringBuilder caption = new StringBuilder(260);
+            StringBuilder className = new StringBuilder(260);
+
+            foreach (IntPtr p in result)
+            {
+                GetClassName(p, className, 260);
+                GetWindowText(p, caption, 260);
+
+                Console.WriteLine("{4} {0} className:{1}, caption:{2}, parent:{3}", p.ToString("X"), className, caption, GetParent(p.ToInt32()).ToString("X"), new String('-', d));
+                PrintAllWindow(d+1, p);
+
+            }
+        }
 
         public const int WM_LBUTTONDOWN = 513;
         public const int WM_KEYDOWN = 0x100;
@@ -100,83 +137,65 @@ namespace kakaoImti
         [STAThread]
         static void Main()
         {
-
-
-            IntPtr talking = FindWindow(null, "박동환");
-            Console.WriteLine(talking.ToString("X"));
-
+            StringBuilder caption = new StringBuilder(260);
+            StringBuilder className = new StringBuilder(260);
 
             Thread.Sleep(3000);
-            IntPtr result = IntPtr.Zero;
-            result = FindWindowEx(talking, result, "EVA_Window_Dblclk", null);
+            List<IntPtr> result = GetRootWindowsOfProcess(0x4678);
 
-            Console.WriteLine(result);
+            ////////////////////////////////
+
+            foreach (IntPtr w in result)
+            {
+                //Console.WriteLine(w);
 
 
-            //if (talking != IntPtr.Zero)
+                GetClassName(w, className, 260);
+                GetWindowText(w, caption, 260);
+
+                Console.WriteLine("handle: {3}, captin : {0}, className : {1}, parent: {2}", caption, className, GetParent(w.ToInt32()).ToString("X"), w.ToString("X"));
+            }
+
+            //////////////////////////////////////////
+
+
+
+            IntPtr EVA_WINDOW_DB = IntPtr.Zero;
+
+            EVA_WINDOW_DB = FindWindowEx(IntPtr.Zero, IntPtr.Zero, "EVA_Window_Dblclk",null);
+
+            PrintAllWindow(1, EVA_WINDOW_DB);
+
+            //List<IntPtr> EVA_List = FindAllWindowEx(IntPtr.Zero, "EVA_Window_Dblclk", null);
+
+            //foreach(IntPtr p in EVA_List)
             //{
-            //    Thread.Sleep(3000);
-            //    Console.WriteLine("start");
+            //    Console.WriteLine("EVA {0} parent:{1}", p.ToString("X"), GetParent(p.ToInt32()).ToString("X"));
+            //    List<IntPtr> EVAChildList = FindAllWindowEx(p, null, null);
 
-            //    IntPtr result = IntPtr.Zero;
-            //    do
+            //    foreach(IntPtr c in EVAChildList)
             //    {
-            //        StringBuilder caption = new StringBuilder(260);
 
-            //        result = FindWindowEx(talking, result, "EVA_Window_Dblclk", null);
+            //        GetClassName(c, className, 260);
+            //        GetWindowText(c, caption, 260);
 
-            //        if (GetClassName(result, caption, 260) > 0)
+            //        Console.WriteLine("- {0} className:{1}, caption:{2}, parent:{3}", c.ToString("X"), className, caption, GetParent(c.ToInt32()).ToString("X"));
+
+            //        List<IntPtr> child_List = FindAllWindowEx(c, "EVA_ChildWindow", null);
+
+            //        foreach(IntPtr c2 in child_List)
             //        {
-            //            Console.WriteLine(caption);
+            //            GetClassName(c2, className, 260);
+            //            GetWindowText(c2, caption, 260);
+
+            //            Console.WriteLine("-- {0} className:{1}, caption:{2}, parent:{3}", c2.ToString("X"), className, caption, GetParent(c2.ToInt32()).ToString("X"));
             //        }
 
             //    }
-            //    while (result != IntPtr.Zero);
-
 
             //}
 
 
-            //Thread.Sleep(3000);
-            //List<IntPtr> result = GetRootWindowsOfProcess(0x41E8);
-
-            //foreach (IntPtr w in result)
-            //{
-            //    //Console.WriteLine(w);
-            //    StringBuilder caption = new StringBuilder(260);
-            //    StringBuilder className = new StringBuilder(260);
-
-            //    GetClassName(w, className, 260);
-            //    GetWindowText(w, caption, 260);
-
-            //    Console.WriteLine("handle: {3},captin : {0}, className : {1}, parent: {2}", caption, className, GetParent(w.ToInt32()).ToString("X"),w.ToString("X"));
-            //}
-
-
-            //////////////////EVA_Window_Dblclk
-
-            //if (talking != IntPtr.Zero)
-            //{
-            //    Thread.Sleep(3000);
-            //    Console.WriteLine("start");
-
-            //    IntPtr result = IntPtr.Zero;
-            //    do
-            //    {
-            //        StringBuilder caption = new StringBuilder(260);
-
-            //        result = FindWindowEx(talking, result, "EVA_Window_Dblclk", null);
-
-            //        if (GetClassName(result, caption, 260) > 0)
-            //        {
-            //            Console.WriteLine(caption);
-            //        }
-
-            //    }
-            //    while (result != IntPtr.Zero);
-
-
-            //}
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
