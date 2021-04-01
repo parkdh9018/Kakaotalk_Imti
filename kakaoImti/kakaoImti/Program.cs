@@ -22,7 +22,10 @@ namespace kakaoImti
         //자식 윈도우 찾는 함수
 
         [DllImport("user32.dll")]
-        public static extern int SendMessage(int hWnd, uint Msg, int wParam, int lParam);
+        public static extern int SendMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
+
+        [DllImport("user32.dll")]
+        public static extern int PostMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
 
         [DllImport("user32.dll")]
         public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
@@ -128,72 +131,53 @@ namespace kakaoImti
 
             }
         }
+        private static int MAKEPOINT(int x, int y)
+        {
+            return ((y << 16) | (x & 0xFFFF));
+        }
 
-        public const int WM_LBUTTONDOWN = 513;
-        public const int WM_KEYDOWN = 0x100;
-        public const int WM_KEYUP = 0x101;
+        public const int WM_LBUTTONDOWN = 0x201;
+        public const int WM_LBUTTONUP = 0x202;
+
+        public const int WM_KEYDOWN = 0x0100;
+        public const int WM_KEYUP = 0x0101;
         public const int VK_TAB = 0x09;
 
         [STAThread]
         static void Main()
         {
-            StringBuilder caption = new StringBuilder(260);
-            StringBuilder className = new StringBuilder(260);
+            //StringBuilder caption = new StringBuilder(260);
+            //StringBuilder className = new StringBuilder(260);
 
-            Thread.Sleep(3000);
-            List<IntPtr> result = GetRootWindowsOfProcess(0x4678);
+            //Thread.Sleep(3000);
+            //List<IntPtr> result = GetRootWindowsOfProcess(0x4678);
 
-            ////////////////////////////////
+            //////////////////////////////////
 
-            foreach (IntPtr w in result)
-            {
-                //Console.WriteLine(w);
-
-
-                GetClassName(w, className, 260);
-                GetWindowText(w, caption, 260);
-
-                Console.WriteLine("handle: {3}, captin : {0}, className : {1}, parent: {2}", caption, className, GetParent(w.ToInt32()).ToString("X"), w.ToString("X"));
-            }
-
-            //////////////////////////////////////////
-
-
-
-            IntPtr EVA_WINDOW_DB = IntPtr.Zero;
-
-            EVA_WINDOW_DB = FindWindowEx(IntPtr.Zero, IntPtr.Zero, "EVA_Window_Dblclk",null);
-
-            PrintAllWindow(1, EVA_WINDOW_DB);
-
-            //List<IntPtr> EVA_List = FindAllWindowEx(IntPtr.Zero, "EVA_Window_Dblclk", null);
-
-            //foreach(IntPtr p in EVA_List)
+            //foreach (IntPtr w in result)
             //{
-            //    Console.WriteLine("EVA {0} parent:{1}", p.ToString("X"), GetParent(p.ToInt32()).ToString("X"));
-            //    List<IntPtr> EVAChildList = FindAllWindowEx(p, null, null);
+            //    //Console.WriteLine(w);
 
-            //    foreach(IntPtr c in EVAChildList)
-            //    {
 
-            //        GetClassName(c, className, 260);
-            //        GetWindowText(c, caption, 260);
+            //    GetClassName(w, className, 260);
+            //    GetWindowText(w, caption, 260);
 
-            //        Console.WriteLine("- {0} className:{1}, caption:{2}, parent:{3}", c.ToString("X"), className, caption, GetParent(c.ToInt32()).ToString("X"));
-
-            //        List<IntPtr> child_List = FindAllWindowEx(c, "EVA_ChildWindow", null);
-
-            //        foreach(IntPtr c2 in child_List)
-            //        {
-            //            GetClassName(c2, className, 260);
-            //            GetWindowText(c2, caption, 260);
-
-            //            Console.WriteLine("-- {0} className:{1}, caption:{2}, parent:{3}", c2.ToString("X"), className, caption, GetParent(c2.ToInt32()).ToString("X"));
-            //        }
-
-            //    }
-
+            //    Console.WriteLine("handle: {3}, captin : {0}, className : {1}, parent: {2}", caption, className, GetParent(w.ToInt32()).ToString("X"), w.ToString("X"));
             //}
+
+
+            Thread.Sleep(3500);
+
+            IntPtr imoticon_window = IntPtr.Zero;
+
+            imoticon_window = FindWindowEx(IntPtr.Zero, IntPtr.Zero, "EVA_Window_Dblclk",null);
+
+            PrintAllWindow(1, imoticon_window);
+            Console.WriteLine(imoticon_window);
+            //Console.WriteLine(PostMessage(imoticon_window, WM_KEYDOWN, VK_TAB, 0));
+            //Console.WriteLine(PostMessage(imoticon_window, WM_KEYUP, VK_TAB, 0));
+            Console.WriteLine(PostMessage(imoticon_window, WM_LBUTTONDOWN, 0, MAKEPOINT(133, 42)));
+            Console.WriteLine(PostMessage(imoticon_window, WM_LBUTTONUP, 0, MAKEPOINT(133, 42)));
 
 
 
