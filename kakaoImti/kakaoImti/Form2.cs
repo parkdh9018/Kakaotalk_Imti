@@ -16,11 +16,13 @@ namespace kakaoImti
         {
             InitializeComponent();
 
+
             if (bitmap != null)
             {
-                pictureBox1.Image = bitmap;
+                backImage.Image = bitmap;
             }
 
+            drawImage.Parent = backImage;
 
 
         }
@@ -32,23 +34,23 @@ namespace kakaoImti
             switch (keyData)
             {
                 case Keys.Right: // left arrow key
-                    p = new Point(pictureBox1.Location.X + d, pictureBox1.Location.Y);
-                    pictureBox1.Location = p;
+                    p = new Point(drawImage.Location.X + d, drawImage.Location.Y);
+                    drawImage.Location = p;
                     return true;
 
                 case Keys.Left: // right arrow key
-                    p = new Point(pictureBox1.Location.X - d, pictureBox1.Location.Y);
-                    pictureBox1.Location = p;
+                    p = new Point(drawImage.Location.X - d, drawImage.Location.Y);
+                    drawImage.Location = p;
                     return true;
 
                 case Keys.Up:
-                    p = new Point(pictureBox1.Location.X, pictureBox1.Location.Y - d);
-                    pictureBox1.Location = p;
+                    p = new Point(drawImage.Location.X, drawImage.Location.Y - d);
+                    drawImage.Location = p;
                     return true;
 
                 case Keys.Down:
-                    p = new Point(pictureBox1.Location.X, pictureBox1.Location.Y + d);
-                    pictureBox1.Location = p;
+                    p = new Point(drawImage.Location.X, drawImage.Location.Y + d);
+                    drawImage.Location = p;
                     return true;
 
                     // etc.
@@ -56,6 +58,24 @@ namespace kakaoImti
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void DrawImage_Paint(object sender, PaintEventArgs e)
+        {
+
+            
+            Graphics g = drawImage.CreateGraphics();
+            Pen p = new Pen(Color.Blue, 2);
+
+            Rectangle rec = new Rectangle(20, 20, 40, 40);
+            g.DrawRectangle(p, rec);
+
+            
+        }
     }
+    
+    
 }

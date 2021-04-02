@@ -93,7 +93,6 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\Image1.png" />
   </ItemGroup>
