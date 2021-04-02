@@ -166,24 +166,24 @@ namespace kakaoImti
             //}
 
 
-            Thread.Sleep(3500);
+            //Thread.Sleep(3500);
 
-            IntPtr imoticon_window = IntPtr.Zero;
+            //IntPtr imoticon_window = IntPtr.Zero;
 
-            imoticon_window = FindWindowEx(IntPtr.Zero, IntPtr.Zero, "EVA_Window_Dblclk",null);
+            //imoticon_window = FindWindowEx(IntPtr.Zero, IntPtr.Zero, "EVA_Window_Dblclk",null);
 
-            PrintAllWindow(1, imoticon_window);
-            Console.WriteLine(imoticon_window);
+            //PrintAllWindow(1, imoticon_window);
+            //Console.WriteLine(imoticon_window);
             //Console.WriteLine(PostMessage(imoticon_window, WM_KEYDOWN, VK_TAB, 0));
             //Console.WriteLine(PostMessage(imoticon_window, WM_KEYUP, VK_TAB, 0));
-            Console.WriteLine(PostMessage(imoticon_window, WM_LBUTTONDOWN, 0, MAKEPOINT(133, 42)));
-            Console.WriteLine(PostMessage(imoticon_window, WM_LBUTTONUP, 0, MAKEPOINT(133, 42)));
+            //Console.WriteLine(PostMessage(imoticon_window, WM_LBUTTONDOWN, 0, MAKEPOINT(133, 42)));
+            //Console.WriteLine(PostMessage(imoticon_window, WM_LBUTTONUP, 0, MAKEPOINT(133, 42)));
 
 
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
+            Application.Run(new Form1());
         }
 
      

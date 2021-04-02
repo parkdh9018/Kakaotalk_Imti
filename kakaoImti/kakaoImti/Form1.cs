@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
+
 
 namespace kakaoImti
 {
@@ -15,6 +17,39 @@ namespace kakaoImti
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_click(object sender, EventArgs e)
+        {
+
+            Bitmap bitmap = new Bitmap(this.pb.Width, this.pb.Height);
+            Graphics graphics = Graphics.FromImage(bitmap);
+
+            graphics.CopyFromScreen(PointToScreen(new Point(this.pb.Location.X, this.pb.Location.Y)), new Point(0, 0), this.pb.Size);
+
+            Form2 dlg = new Form2(bitmap);
+            dlg.ShowDialog();
+
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            Console.WriteLine("{0}, {1}",this.Width, this.Height);
         }
     }
 }
