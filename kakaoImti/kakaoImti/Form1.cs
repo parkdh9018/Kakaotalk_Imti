@@ -28,20 +28,13 @@ namespace kakaoImti
         [DllImport("user32.dll")]
         public static extern IntPtr FindWindowEx(IntPtr hWnd1, IntPtr hWnd2, string lpClassName, string lpWindowName);
 
+        private Bitmap bitmap;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -62,6 +55,9 @@ namespace kakaoImti
             int width = stRect.right - stRect.left;
             int height = stRect.bottom - stRect.top;
 
+            pb.Width = width;
+            pb.Height = height;
+
             if (width == 0)
             {
                 MessageBox.Show("창을 찾을 수 없습니다.");
@@ -76,13 +72,21 @@ namespace kakaoImti
             graphics.CopyFromScreen(stRect.left, stRect.top, 0, 0, this.pb.Size);
 
             pb.Image = bitmap;
+            this.bitmap = bitmap;
 
+            
         }
         
 
         private void Form1_Resize(object sender, EventArgs e)
         {
             //Console.WriteLine("{0}, {1}",this.Width, this.Height);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2(this.bitmap);
+            form2.ShowDialog();
         }
     }
 }
