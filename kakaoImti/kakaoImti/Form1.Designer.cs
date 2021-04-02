@@ -88,7 +88,7 @@
             this.pb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pb.BackColor = System.Drawing.Color.DarkGreen;
+            this.pb.BackColor = System.Drawing.Color.Transparent;
             this.pb.Location = new System.Drawing.Point(6, 35);
             this.pb.Name = "pb";
             this.pb.Size = new System.Drawing.Size(363, 325);
