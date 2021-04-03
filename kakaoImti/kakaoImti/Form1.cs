@@ -85,7 +85,7 @@ namespace kakaoImti
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2(this.bitmap);
+            Form2 form2 = new Form2(name.Text, this.bitmap);
             form2.ShowDialog();
         }
     }
