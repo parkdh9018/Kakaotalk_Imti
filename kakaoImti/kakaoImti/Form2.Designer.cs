@@ -40,7 +40,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(615, 552);
+            this.button1.Location = new System.Drawing.Point(703, 657);
             this.button1.Margin = new System.Windows.Forms.Padding(10);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -55,19 +55,17 @@
             this.panel1.Controls.Add(this.backImage);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(550, 467);
+            this.panel1.Size = new System.Drawing.Size(773, 632);
             this.panel1.TabIndex = 1;
             // 
             // backImage
             // 
-            this.backImage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.backImage.BackColor = System.Drawing.SystemColors.Control;
             this.backImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.backImage.Image = global::kakaoImti.Properties.Resources.Image1;
-            this.backImage.Location = new System.Drawing.Point(12, 12);
+            this.backImage.Image = global::kakaoImti.Properties.Resources.image2;
+            this.backImage.Location = new System.Drawing.Point(3, 3);
             this.backImage.Name = "backImage";
-            this.backImage.Size = new System.Drawing.Size(72, 156);
+            this.backImage.Size = new System.Drawing.Size(337, 612);
             this.backImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.backImage.TabIndex = 3;
             this.backImage.TabStop = false;
@@ -76,7 +74,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(24, 552);
+            this.button2.Location = new System.Drawing.Point(12, 657);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 3;
@@ -86,17 +84,19 @@
             // 
             // panel2
             // 
+            this.panel2.AutoScroll = true;
             this.panel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.panel2.Location = new System.Drawing.Point(12, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(563, 478);
+            this.panel2.Size = new System.Drawing.Size(773, 632);
             this.panel2.TabIndex = 4;
+            this.panel2.WrapContents = false;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(709, 594);
+            this.ClientSize = new System.Drawing.Size(797, 699);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.panel1);

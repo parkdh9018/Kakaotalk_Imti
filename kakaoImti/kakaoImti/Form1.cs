@@ -83,6 +83,7 @@ namespace kakaoImti
             //Console.WriteLine("{0}, {1}",this.Width, this.Height);
         }
 
+
         private void button2_Click(object sender, EventArgs e)
         {
             Form2 form2 = new Form2(name.Text, this.bitmap);
