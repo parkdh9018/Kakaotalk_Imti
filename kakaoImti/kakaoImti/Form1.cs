@@ -85,12 +85,7 @@ namespace kakaoImti
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(name.Text))
-            {
-                MessageBox.Show("이모티콘 이름을 입력해주세요");
-                return;
-            }
-            Form2 form2 = new Form2(name.Text, this.bitmap);
+            Form2 form2 = new Form2(this.bitmap);
             form2.ShowDialog();
         }
 

@@ -22,17 +22,15 @@ namespace kakaoImti
         Bitmap MainImage;
         List<PictureBox> listPicture;
         List<TextBox> listTextBox;
-        String ImoticonName;
 
         List<Panel> ListPanel = new List<Panel>();
 
-        public Form2(String name, Bitmap bitmap = null)
+        public Form2(Bitmap bitmap = null)
         {
             InitializeComponent();
 
             listPicture = new List<PictureBox>();
             listTextBox = new List<TextBox>();
-            ImoticonName = name;
 
             if (bitmap != null)
             {
@@ -136,7 +134,7 @@ namespace kakaoImti
             else
             {
                 DataSaveLoad ds = new DataSaveLoad();
-                ds.SaveData(ImoticonName, listPicture.Select(listPicture => listPicture.Image).ToList<Image>(),listTextBox.Select(listTextBox => listTextBox.Text).ToList<String>());
+                ds.SaveData(name.Text, listPicture.Select(listPicture => listPicture.Image).ToList<Image>(),listTextBox.Select(listTextBox => listTextBox.Text).ToList<String>());
                 this.Close(); 
             }
         }
