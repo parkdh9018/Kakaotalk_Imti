@@ -92,14 +92,14 @@ namespace kakaoImti
         private void button3_Click(object sender, EventArgs e)
         {
             DataSaveLoad dl = new DataSaveLoad();
-         
+
             DataObject dataObject = dl.LoadData("케장2");
 
 
             for (int i = 0; i < dataObject.imageCodes.Count; i++)
             {
                 PictureBox pictureBox = new PictureBox();
-                pictureBox.Image = dl.Base64ToImage(dataObject.imageCodes[i]);
+                pictureBox.Image = dataObject.imageList[i];
 
                 ImagePanel.Controls.Add(pictureBox);
             }

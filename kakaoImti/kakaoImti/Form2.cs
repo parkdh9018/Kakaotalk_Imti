@@ -134,7 +134,17 @@ namespace kakaoImti
             else
             {
                 DataSaveLoad ds = new DataSaveLoad();
-                ds.SaveData(name.Text, listPicture.Select(listPicture => listPicture.Image).ToList<Image>(),listTextBox.Select(listTextBox => listTextBox.Text).ToList<String>());
+
+                DataObject dataObject = new DataObject
+                (
+                    this.name.Text,
+                    Int32.Parse(this.positionRow.Text),
+                    Int32.Parse(this.positionCol.Text),
+                    listPicture.Select(picture => picture.Image).ToList<Image>(),
+                    listTextBox.Select(textBox => textBox.Text).ToList()
+                );
+
+                ds.SaveData(dataObject);
                 this.Close(); 
             }
         }

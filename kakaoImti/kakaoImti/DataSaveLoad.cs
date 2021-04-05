@@ -14,20 +14,30 @@ namespace kakaoImti
     [Serializable]
     class DataObject
     {
+        public int PositionRow;
+        public int PositionCol;
         public String imoticonName;
         public List<String> imageCodes;
         public List<String> kewordTexts;
 
-        public DataObject()
+        [NonSerialized]
+        public List<Image> imageList;
+
+        public DataObject(String imoticonName, int PositionRow, int PositionCol, List<Image> imageList, List<String> kewordTexts)
         {
-            imageCodes = new List<string>();
-            kewordTexts = new List<string>();
+            this.imoticonName = imoticonName;
+            this.PositionRow = PositionRow;
+            this.PositionCol = PositionCol;
+            this.imageList = imageList;
+            this.kewordTexts = kewordTexts;
+
+            imageCodes = this.imageList.Select(image => ImageToBase64(image)).ToList();
         }
-    }
-    class DataSaveLoad
-    {
-        FileStream fs;
-        BinaryFormatter bf;
+
+        public void getImage()
+        {
+            imageList = this.imageCodes.Select(code => Base64ToImage(code)).ToList();
+        }
 
         private String ImageToBase64(Image image)
         {
@@ -40,37 +50,32 @@ namespace kakaoImti
 
             return base64;
         }
-        
-        public Image Base64ToImage(String base64)
+
+        private Image Base64ToImage(String base64)
         {
             Image image = null;
 
             byte[] imageBytes = Convert.FromBase64String(base64);
-            MemoryStream m = new MemoryStream(imageBytes,0,imageBytes.Length);
+            MemoryStream m = new MemoryStream(imageBytes, 0, imageBytes.Length);
             m.Write(imageBytes, 0, imageBytes.Length);
 
             image = Image.FromStream(m, true);
 
             return image;
         }
+    }
+    class DataSaveLoad
+    {
+        FileStream fs;
+        BinaryFormatter bf;
 
-
-        public void SaveData(String name, List<Image> images, List<string> texts)
+        public void SaveData(DataObject dataobject)
         {
-            fs = new FileStream(name+".dat", FileMode.Create);
+            fs = new FileStream(dataobject.imoticonName+".dat", FileMode.Create);
             bf = new BinaryFormatter();
 
-            DataObject obj = new DataObject();
 
-            obj.imoticonName = name;
-
-            for (int i = 0; i < images.Count; i++)
-            {
-                obj.imageCodes.Add(ImageToBase64(images[i]));
-                obj.kewordTexts.Add(texts[i]);
-            }
-
-            bf.Serialize(fs, obj);
+            bf.Serialize(fs, dataobject);
             fs.Close();
         }
 
@@ -80,6 +85,8 @@ namespace kakaoImti
             bf = new BinaryFormatter();
 
             DataObject obj = (DataObject)bf.Deserialize(fs);
+
+            obj.getImage();
 
             fs.Close();
 

@@ -34,13 +34,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.name = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.SizeCol = new System.Windows.Forms.TextBox();
-            this.SizeRow = new System.Windows.Forms.TextBox();
+            this.sizeCol = new System.Windows.Forms.TextBox();
+            this.sizeRow = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.PositionCol = new System.Windows.Forms.TextBox();
+            this.positionCol = new System.Windows.Forms.TextBox();
             this.positionRow = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -109,8 +109,8 @@
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.SizeCol);
-            this.panel4.Controls.Add(this.SizeRow);
+            this.panel4.Controls.Add(this.sizeCol);
+            this.panel4.Controls.Add(this.sizeRow);
             this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.label6);
             this.panel4.Controls.Add(this.label7);
@@ -119,21 +119,21 @@
             this.panel4.Size = new System.Drawing.Size(195, 138);
             this.panel4.TabIndex = 11;
             // 
-            // SizeCol
+            // sizeCol
             // 
-            this.SizeCol.Location = new System.Drawing.Point(14, 98);
-            this.SizeCol.Name = "SizeCol";
-            this.SizeCol.Size = new System.Drawing.Size(100, 21);
-            this.SizeCol.TabIndex = 10;
-            this.SizeCol.Text = "4";
+            this.sizeCol.Location = new System.Drawing.Point(14, 98);
+            this.sizeCol.Name = "sizeCol";
+            this.sizeCol.Size = new System.Drawing.Size(100, 21);
+            this.sizeCol.TabIndex = 10;
+            this.sizeCol.Text = "4";
             // 
-            // SizeRow
+            // sizeRow
             // 
-            this.SizeRow.Location = new System.Drawing.Point(14, 53);
-            this.SizeRow.Name = "SizeRow";
-            this.SizeRow.Size = new System.Drawing.Size(100, 21);
-            this.SizeRow.TabIndex = 9;
-            this.SizeRow.Text = "6";
+            this.sizeRow.Location = new System.Drawing.Point(14, 53);
+            this.sizeRow.Name = "sizeRow";
+            this.sizeRow.Size = new System.Drawing.Size(100, 21);
+            this.sizeRow.TabIndex = 9;
+            this.sizeRow.Text = "6";
             // 
             // label5
             // 
@@ -165,7 +165,7 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.PositionCol);
+            this.panel3.Controls.Add(this.positionCol);
             this.panel3.Controls.Add(this.positionRow);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.label3);
@@ -175,12 +175,12 @@
             this.panel3.Size = new System.Drawing.Size(195, 138);
             this.panel3.TabIndex = 7;
             // 
-            // PositionCol
+            // positionCol
             // 
-            this.PositionCol.Location = new System.Drawing.Point(14, 98);
-            this.PositionCol.Name = "PositionCol";
-            this.PositionCol.Size = new System.Drawing.Size(100, 21);
-            this.PositionCol.TabIndex = 10;
+            this.positionCol.Location = new System.Drawing.Point(14, 98);
+            this.positionCol.Name = "positionCol";
+            this.positionCol.Size = new System.Drawing.Size(100, 21);
+            this.positionCol.TabIndex = 10;
             // 
             // positionRow
             // 
@@ -271,13 +271,13 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox name;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.TextBox SizeCol;
-        private System.Windows.Forms.TextBox SizeRow;
+        private System.Windows.Forms.TextBox sizeCol;
+        private System.Windows.Forms.TextBox sizeRow;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox PositionCol;
+        private System.Windows.Forms.TextBox positionCol;
         private System.Windows.Forms.TextBox positionRow;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;

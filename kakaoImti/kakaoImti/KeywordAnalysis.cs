@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace kakaoImti
 {
+    
     class KeywordAnalysis
     {
+        int PositionRow;
+        int PositionCol;
+        List<String> texts;
 
         public KeywordAnalysis()
         {
