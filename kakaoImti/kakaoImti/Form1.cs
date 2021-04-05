@@ -58,7 +58,7 @@ namespace kakaoImti
             pb.Width = width;
             pb.Height = height;
 
-            if (width == 0)
+            if (width == 0 || height == 0)
             {
                 MessageBox.Show("창을 찾을 수 없습니다.");
                 return;
@@ -74,7 +74,6 @@ namespace kakaoImti
             pb.Image = bitmap;
             this.bitmap = bitmap;
 
-            
         }
         
 
@@ -86,8 +85,33 @@ namespace kakaoImti
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(name.Text))
+            {
+                MessageBox.Show("이모티콘 이름을 입력해주세요");
+                return;
+            }
             Form2 form2 = new Form2(name.Text, this.bitmap);
             form2.ShowDialog();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DataSaveLoad dl = new DataSaveLoad();
+         
+            DataObject dataObject = dl.LoadData("케장2");
+
+
+            for (int i = 0; i < dataObject.imageCodes.Count; i++)
+            {
+                PictureBox pictureBox = new PictureBox();
+                pictureBox.Image = dl.Base64ToImage(dataObject.imageCodes[i]);
+
+                ImagePanel.Controls.Add(pictureBox);
+            }
+
+
+
+        }
+
     }
 }

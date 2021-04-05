@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace kakaoImti
 {
     public partial class Form2 : Form
@@ -17,11 +18,11 @@ namespace kakaoImti
         int index = 0;
         int row = 4;
         int col = 6;
-        int ele_index = 0;
 
         Bitmap MainImage;
         List<PictureBox> listPicture;
         List<TextBox> listTextBox;
+        String ImoticonName;
 
         List<Panel> ListPanel = new List<Panel>();
 
@@ -31,14 +32,13 @@ namespace kakaoImti
 
             listPicture = new List<PictureBox>();
             listTextBox = new List<TextBox>();
+            ImoticonName = name;
 
             if (bitmap != null)
             {
                 backImage.Image = bitmap;
                 MainImage = bitmap;
             }
-
-            
 
         }
 
@@ -82,7 +82,7 @@ namespace kakaoImti
             element.BorderStyle = BorderStyle.FixedSingle;
 
             PictureBox picture = new PictureBox();
-            picture.Size = new Size(100, 90);
+            picture.Size = new Size(d, d);
             picture.Location = new Point(9, 9);
             picture.BorderStyle = BorderStyle.FixedSingle;
             listPicture.Add(picture);
@@ -114,10 +114,11 @@ namespace kakaoImti
                     Bitmap bitmap = MainImage.Clone(rec, System.Drawing.Imaging.PixelFormat.DontCare);
                     listPicture[cnt++].Image = bitmap;
 
-
                 }
 
             }
+
+            p.Dispose();
       
         }
 
@@ -129,18 +130,22 @@ namespace kakaoImti
 
         private void Next_click(Object sender, EventArgs e)
         {
+
             if (index < ListPanel.Count - 1)
                 ListPanel[++index].BringToFront();
+            else
+            {
+                DataSaveLoad ds = new DataSaveLoad();
+                ds.SaveData(ImoticonName, listPicture.Select(listPicture => listPicture.Image).ToList<Image>(),listTextBox.Select(listTextBox => listTextBox.Text).ToList<String>());
+                this.Close(); 
+            }
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
-
             ListPanel.Add(panel1);
             ListPanel.Add(panel2);
             ListPanel[index].BringToFront();
-
-
 
             for (int i = 0; i < row * col; i++)
                 createElement();
