@@ -29,6 +29,9 @@ namespace kakaoImti
         public static extern IntPtr FindWindowEx(IntPtr hWnd1, IntPtr hWnd2, string lpClassName, string lpWindowName);
 
         private Bitmap bitmap;
+        private DataSaveLoad dl;
+        private DataObject dataObject;
+        KeywordAnalysis keywordAnalysis;
 
         public Form1()
         {
@@ -38,7 +41,12 @@ namespace kakaoImti
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Trie trie = new Trie();
+            dl = new DataSaveLoad();
+            keywordAnalysis = new KeywordAnalysis();
+
+            dataObject = dl.LoadData("케장3");
+
+            keywordAnalysis.AddData(dataObject.PositionRow, dataObject.PositionCol, dataObject.kewordTexts);
         }
 
         private void button1_click(object sender, EventArgs e)
@@ -75,13 +83,6 @@ namespace kakaoImti
             this.bitmap = bitmap;
 
         }
-        
-
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            //Console.WriteLine("{0}, {1}",this.Width, this.Height);
-        }
-
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -89,24 +90,23 @@ namespace kakaoImti
             form2.ShowDialog();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+
+        private void searchBox_TextChanged(object sender, EventArgs e)
         {
-            DataSaveLoad dl = new DataSaveLoad();
+            ImagePanel.Controls.Clear();
 
-            DataObject dataObject = dl.LoadData("케장2");
+            List<Value> values = keywordAnalysis.findIndex(searchBox.Text);
 
+            Console.WriteLine(values.Count);
 
-            for (int i = 0; i < dataObject.imageCodes.Count; i++)
+            for (int i = 0; i < values.Count; i++)
             {
                 PictureBox pictureBox = new PictureBox();
-                pictureBox.Image = dataObject.imageList[i];
+                pictureBox.Image = dataObject.imageList[values[i].index];
+                pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
 
                 ImagePanel.Controls.Add(pictureBox);
             }
-
-
-
         }
-
     }
 }
