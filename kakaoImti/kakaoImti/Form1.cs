@@ -38,7 +38,7 @@ namespace kakaoImti
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            Trie trie = new Trie();
         }
 
         private void button1_click(object sender, EventArgs e)
