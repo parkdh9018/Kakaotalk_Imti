@@ -90,7 +90,6 @@ namespace kakaoImti
                 foreach(String text in texts)
                 {
                     insert(text, value);
-
                 }
 
             }

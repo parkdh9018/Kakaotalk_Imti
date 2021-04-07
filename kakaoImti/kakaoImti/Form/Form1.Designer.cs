@@ -54,7 +54,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(524, 396);
+            this.tabControl1.Size = new System.Drawing.Size(355, 258);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -63,7 +63,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(516, 370);
+            this.tabPage1.Size = new System.Drawing.Size(347, 232);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -75,7 +75,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(510, 364);
+            this.panel1.Size = new System.Drawing.Size(341, 226);
             this.panel1.TabIndex = 0;
             // 
             // ImagePanel
@@ -87,7 +87,7 @@
             this.ImagePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ImagePanel.Location = new System.Drawing.Point(28, 64);
             this.ImagePanel.Name = "ImagePanel";
-            this.ImagePanel.Size = new System.Drawing.Size(457, 277);
+            this.ImagePanel.Size = new System.Drawing.Size(288, 139);
             this.ImagePanel.TabIndex = 1;
             // 
             // searchBox
@@ -108,7 +108,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(516, 370);
+            this.tabPage2.Size = new System.Drawing.Size(347, 232);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -116,7 +116,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(414, 341);
+            this.button2.Location = new System.Drawing.Point(245, 203);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(96, 23);
             this.button2.TabIndex = 2;
@@ -143,8 +143,8 @@
             this.pb.Image = global::kakaoImti.Properties.Resources.image2;
             this.pb.Location = new System.Drawing.Point(15, 35);
             this.pb.Name = "pb";
-            this.pb.Size = new System.Drawing.Size(215, 321);
-            this.pb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb.Size = new System.Drawing.Size(141, 191);
+            this.pb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb.TabIndex = 0;
             this.pb.TabStop = false;
             // 
@@ -152,7 +152,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(548, 439);
+            this.ClientSize = new System.Drawing.Size(379, 301);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
