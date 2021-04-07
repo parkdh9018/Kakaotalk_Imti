@@ -40,10 +40,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.positionCol = new System.Windows.Forms.TextBox();
-            this.positionRow = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.ListIndexTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.backImage = new System.Windows.Forms.PictureBox();
@@ -101,7 +98,7 @@
             // 
             // name
             // 
-            this.name.Location = new System.Drawing.Point(371, 70);
+            this.name.Location = new System.Drawing.Point(374, 89);
             this.name.Name = "name";
             this.name.Size = new System.Drawing.Size(100, 21);
             this.name.TabIndex = 12;
@@ -114,7 +111,7 @@
             this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.label6);
             this.panel4.Controls.Add(this.label7);
-            this.panel4.Location = new System.Drawing.Point(371, 310);
+            this.panel4.Location = new System.Drawing.Point(371, 268);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(195, 138);
             this.panel4.TabIndex = 11;
@@ -165,47 +162,19 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.positionCol);
-            this.panel3.Controls.Add(this.positionRow);
-            this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.ListIndexTextBox);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(371, 123);
+            this.panel3.Location = new System.Drawing.Point(371, 144);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(195, 138);
+            this.panel3.Size = new System.Drawing.Size(195, 87);
             this.panel3.TabIndex = 7;
             // 
-            // positionCol
+            // ListIndexTextBox
             // 
-            this.positionCol.Location = new System.Drawing.Point(14, 98);
-            this.positionCol.Name = "positionCol";
-            this.positionCol.Size = new System.Drawing.Size(100, 21);
-            this.positionCol.TabIndex = 10;
-            // 
-            // positionRow
-            // 
-            this.positionRow.Location = new System.Drawing.Point(14, 53);
-            this.positionRow.Name = "positionRow";
-            this.positionRow.Size = new System.Drawing.Size(100, 21);
-            this.positionRow.TabIndex = 9;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 83);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 12);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "열";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 38);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(17, 12);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "행";
+            this.ListIndexTextBox.Location = new System.Drawing.Point(14, 42);
+            this.ListIndexTextBox.Name = "ListIndexTextBox";
+            this.ListIndexTextBox.Size = new System.Drawing.Size(100, 21);
+            this.ListIndexTextBox.TabIndex = 9;
             // 
             // label2
             // 
@@ -219,7 +188,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(372, 43);
+            this.label1.Location = new System.Drawing.Point(372, 63);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 5;
@@ -277,10 +246,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox positionCol;
-        private System.Windows.Forms.TextBox positionRow;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox ListIndexTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox backImage;

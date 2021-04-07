@@ -41,9 +41,9 @@ namespace kakaoImti
             dl = new DataSaveLoad();
             keywordAnalysis = new KeywordAnalysis();
 
-            dataObject = dl.LoadData("케장3");
+            dataObject = dl.LoadData("케장1");
 
-            keywordAnalysis.AddData(dataObject.PositionRow, dataObject.PositionCol, dataObject.kewordTexts);
+            keywordAnalysis.AddData(dataObject.listIndex, dataObject.kewordTexts);
 
             for (int i = 0; i < dataObject.imageList.Count; i++)
             {
@@ -51,7 +51,7 @@ namespace kakaoImti
                 pictureBox.Image = dataObject.imageList[i];
                 pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
                 pictureBox.Click += new EventHandler((Handlesender,HandleE) 
-                    => image_click(Handlesender, HandleE, dataObject.PositionRow, dataObject.PositionCol,i));
+                    => image_click(Handlesender, HandleE, dataObject.listIndex,i));
                 pictureBoxes.Add(pictureBox);
             }
 
@@ -87,9 +87,9 @@ namespace kakaoImti
             
         }
 
-        private void image_click(object sender, EventArgs e, int row, int col, int index)
+        private void image_click(object sender, EventArgs e, int listIndex, int index)
         {
-            handleManege.ImageClick(row, col, index);
+            handleManege.ImageClick(listIndex, index);
         }
     }
 }

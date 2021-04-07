@@ -19,16 +19,6 @@ namespace kakaoImti
             public int top;
             public int right;
             public int bottom;
-
-            public int Height()
-            {
-                return bottom - top;
-            }
-
-            public int Width()
-            {
-                return right - left;
-            }
         }
 
         public IntPtr wIndow;

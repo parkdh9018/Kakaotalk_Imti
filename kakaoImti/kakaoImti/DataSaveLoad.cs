@@ -14,8 +14,7 @@ namespace kakaoImti
     [Serializable]
     class DataObject
     {
-        public int PositionRow;
-        public int PositionCol;
+        public int listIndex;
         public String imoticonName;
         public List<String> imageCodes;
         public List<String> kewordTexts;
@@ -23,11 +22,10 @@ namespace kakaoImti
         [NonSerialized]
         public List<Image> imageList;
 
-        public DataObject(String imoticonName, int PositionRow, int PositionCol, List<Image> imageList, List<String> kewordTexts)
+        public DataObject(String imoticonName, int listIndex, List<Image> imageList, List<String> kewordTexts)
         {
             this.imoticonName = imoticonName;
-            this.PositionRow = PositionRow;
-            this.PositionCol = PositionCol;
+            this.listIndex = listIndex;
             this.imageList = imageList;
             this.kewordTexts = kewordTexts;
 

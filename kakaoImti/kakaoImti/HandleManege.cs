@@ -95,10 +95,7 @@ namespace kakaoImti
 
         private IntPtr getWindowOfProcess(string processName ,string className, string windowText)
         {            
-
             List<IntPtr> intPtrs = FindAllWindowEx(IntPtr.Zero, className, windowText);
-
-            Console.WriteLine(intPtrs.Count);
 
             foreach (IntPtr p in intPtrs)
             {
@@ -106,8 +103,6 @@ namespace kakaoImti
                 GetWindowThreadProcessId(p, out processId);
 
                 Process process = Process.GetProcessById(processId.ToInt32());
-
-                Console.WriteLine(process.ProcessName);
 
                 if (process.ProcessName == processName)
                 {
@@ -126,7 +121,7 @@ namespace kakaoImti
             PostMessage(hwnd, WM_LBUTTONUP, 0, MAKEPOINT(x, y));
         }
 
-        public void ImageClick(int row, int col, int index)
+        public void ImageClick(int listIndex, int index)
         {
 
             WindowRect talkBoxWindow = new WindowRect();
@@ -135,18 +130,26 @@ namespace kakaoImti
             ////이모티콘 창 클릭
             ClickMessage(talkBoxWindow.wIndow, 20, talkBoxWindow.height - 20);
 
-            Thread.Sleep(50);
+            Thread.Sleep(200);
 
             WindowRect EntireWindow = new WindowRect(FindAllWindowEx(IntPtr.Zero, "EVA_Window_Dblclk", null)[1]);
-            WindowRect childWindow = new WindowRect(FindWindowEx(EntireWindow.wIndow, IntPtr.Zero, "EVA_ChildWindow", null));
-            WindowRect ImoticonListWindow = new WindowRect(FindWindowEx(childWindow.wIndow, IntPtr.Zero, "EVA_ChildWindow_Dblclk", null));
-            WindowRect imoticonWindow = new WindowRect(FindWindowEx(childWindow.wIndow, ImoticonListWindow.wIndow, "EVA_ChildWindow_Dblclk", null));
 
             ////이모티콘 탭 클릭
             ClickMessage(EntireWindow.wIndow, EntireWindow.width / 4 + 50, 40);
 
+            Thread.Sleep(200);
+
+            WindowRect childWindow = new WindowRect(FindWindowEx(EntireWindow.wIndow, IntPtr.Zero, "EVA_ChildWindow", null));
+            WindowRect listWindow = new WindowRect(FindWindowEx(childWindow.wIndow, IntPtr.Zero, "EVA_ChildWindow_Dblclk", null));
+            WindowRect imoticonWindow = new WindowRect(FindWindowEx(childWindow.wIndow, listWindow.wIndow, "EVA_ChildWindow_Dblclk", null));
+
+
             ////이모티콘 리스트 클릭
-            ClickMessage(ImoticonListWindow.wIndow, EntireWindow.width / 4 + 50, 40);
+            Point first = new Point(29, 24);
+            int maxWidthCnt = (listWindow.width - 14) / 38;
+
+
+            ClickMessage(listWindow.wIndow, first.X + 40 * (listIndex % maxWidthCnt - 1) ,first.Y + 30 * (listIndex / maxWidthCnt));
 
         }
     }

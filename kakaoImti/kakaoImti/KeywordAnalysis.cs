@@ -9,8 +9,7 @@ namespace kakaoImti
 {
     struct Value
     {
-        public int positionCol;
-        public int positionRow;
+        public int listIndex;
         public int index;
     }
 
@@ -75,15 +74,14 @@ namespace kakaoImti
             return vList;
         }
 
-        public void AddData(int positonRow, int postionCol, List<String> keywordTexts)
+        public void AddData(int listIndex, List<String> keywordTexts)
         {
 
             for(int i = 0; i < keywordTexts.Count; i++)
             {
                 Value value = new Value();
                 value.index = i;
-                value.positionCol = postionCol;
-                value.positionRow = positonRow;
+                value.listIndex = listIndex;
 
                 List<String> texts = keywordTexts[i].Split(',').ToList();
 

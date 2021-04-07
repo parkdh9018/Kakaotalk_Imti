@@ -141,8 +141,7 @@ namespace kakaoImti
                 DataObject dataObject = new DataObject
                 (
                     this.name.Text,
-                    Int32.Parse(this.positionRow.Text),
-                    Int32.Parse(this.positionCol.Text),
+                    Int32.Parse(this.ListIndexTextBox.Text),
                     listPicture.Select(picture => picture.Image).ToList<Image>(),
                     listTextBox.Select(textBox => textBox.Text).ToList()
                 );
