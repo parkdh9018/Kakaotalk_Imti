@@ -14,7 +14,7 @@ namespace kakaoImti
     public partial class Form2 : Form
     {
         int d = 84;
-        int width = 84;
+
         int index = 0;
         int row = 4;
         int col = 6;
@@ -104,9 +104,12 @@ namespace kakaoImti
 
             for (int i = 0; i < row; i++)
             {
+
+                Point firstPoint = new Point(0, 90);
+
                 for(int j = 0; j < col; j++)
                 {
-                    Rectangle rec = new Rectangle(0+d*i, width + d*j, d, d);
+                    Rectangle rec = new Rectangle(firstPoint.X + d*i, firstPoint.Y + d*j, d, d);
                     e.Graphics.DrawRectangle(p,rec);
 
                     Bitmap bitmap = MainImage.Clone(rec, System.Drawing.Imaging.PixelFormat.DontCare);

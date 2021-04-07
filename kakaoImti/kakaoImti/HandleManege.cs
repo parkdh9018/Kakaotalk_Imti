@@ -49,8 +49,14 @@ namespace kakaoImti
         [DllImport("user32.dll")]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out IntPtr lpdwProcessId);
 
+        [DllImport("User32.dll")]
+        public static extern IntPtr GetWindow(IntPtr hWnd, uint uCmd);
+
         public const int WM_LBUTTONDOWN = 0x201;
         public const int WM_LBUTTONUP = 0x202;
+
+        int imoticonWindowWidth;
+        int imoticonWindowHeight;
 
         public HandleManege()
         {
@@ -80,14 +86,21 @@ namespace kakaoImti
             return result;
         }
 
+        //private IntPtr getImoticonWindow()
+        //{
+        //    IntPtr imoticon_window = FindWindow("EVA_Window_Dblclk", null);
+        //    IntPtr child_window = FindWindowEx(imoticon_window, IntPtr.Zero, "EVA_ChildWindow", null);
+
+        //    return child_window;
+        //}
+
         public Bitmap ImoticonWindowLoad()
         {
             Thread.Sleep(3000);
-            IntPtr imoticon_window = FindWindow("EVA_Window_Dblclk", null);
-            IntPtr child_window = FindWindowEx(imoticon_window, IntPtr.Zero, "EVA_ChildWindow", null);
+            IntPtr imoticon_window = FindWindowEx(FindWindow("EVA_Window_Dblclk", null), IntPtr.Zero, "EVA_ChildWindow", null);
 
             RECT stRect = default(RECT);
-            GetWindowRect(child_window, ref stRect);
+            GetWindowRect(imoticon_window, ref stRect);
 
             Console.WriteLine("{0} {1} {2} {3}", stRect.left, stRect.top, stRect.right, stRect.bottom);
 
@@ -95,7 +108,7 @@ namespace kakaoImti
             int height = stRect.bottom - stRect.top;
 
             if (width == 0 || height == 0)
-                return new Bitmap(1,1);
+                return new Bitmap(1, 1);
 
             Bitmap bitmap = new Bitmap(width, height);
             Graphics graphics = Graphics.FromImage(bitmap);
@@ -105,11 +118,13 @@ namespace kakaoImti
             return bitmap;
         }
 
-        private IntPtr getTalkBox()
-        {
+
+
+        private IntPtr getWindowOfProcess(string processName ,string className, string windowText)
+        {            
             IntPtr result = IntPtr.Zero;
 
-            List<IntPtr> intPtrs = FindAllWindowEx(IntPtr.Zero, "#32770", null);
+            List<IntPtr> intPtrs = FindAllWindowEx(IntPtr.Zero, className, windowText);
 
             foreach (IntPtr p in intPtrs)
             {
@@ -118,7 +133,7 @@ namespace kakaoImti
 
                 Process process = Process.GetProcessById(processId.ToInt32());
 
-                if(process.ProcessName == "KakaoTalk")
+                if (process.ProcessName == processName)
                 {
                     result = p;
                     break;
@@ -129,12 +144,28 @@ namespace kakaoImti
             return result;
         }
 
+        private void ClickMessage(IntPtr hwnd, int x, int y)
+        {
+            PostMessage(hwnd, WM_LBUTTONDOWN, 0, MAKEPOINT(x, y));
+            PostMessage(hwnd, WM_LBUTTONUP, 0, MAKEPOINT(x, y));
+        }
+
         public void ImageClick(int row, int col, int index)
         {
-            IntPtr talkBox = getTalkBox();
+            IntPtr talkBoxWindow = getWindowOfProcess("KakaoTalk","#32770", null);
 
-            Console.WriteLine(PostMessage(talkBox, WM_LBUTTONDOWN, 0, MAKEPOINT(17, 710)));
-            Console.WriteLine(PostMessage(talkBox, WM_LBUTTONUP, 0, MAKEPOINT(17, 710)));
+            //이모티콘 창 클릭 17, 71
+            ClickMessage(talkBoxWindow, 17, 710);
+
+            Thread.Sleep(50);
+
+            IntPtr imoticonWindow = FindAllWindowEx(IntPtr.Zero, "EVA_Window_Dblclk", null)[1];
+            IntPtr childWindow = FindWindowEx(imoticonWindow, IntPtr.Zero, "EVA_ChildWindow", null);
+
+            ////이모티콘 탭 클릭
+            ClickMessage(imoticonWindow, 130, 40);
+
+
         }
     }
 }
