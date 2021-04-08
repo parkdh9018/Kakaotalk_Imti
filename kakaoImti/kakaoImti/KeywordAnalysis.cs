@@ -16,12 +16,12 @@ namespace kakaoImti
     class Trie
     {
         public Dictionary<char, Trie> children;
-        public List<Value> values;
+        public HashSet<Value> values;
 
         public Trie()
         {
             children = new Dictionary<char, Trie>();
-            values = new List<Value>();
+            values = new HashSet<Value>();
         }
 
         
@@ -40,6 +40,8 @@ namespace kakaoImti
         {
             Trie root = node;
 
+            //Console.WriteLine("key : {0}, value.index : {1}, value.listindex : {2}", key, value.index, value.listIndex);
+
             foreach (char c in key)
             {
                 if (!root.children.ContainsKey(c))
@@ -56,9 +58,9 @@ namespace kakaoImti
         }
 
 
-        public List<Value> findIndex(String str)
+        public HashSet<Value> findIndex(String str)
         {
-            List<Value> vList = new List<Value>();
+            HashSet<Value> setList = new HashSet<Value>();
             Trie root = node;
 
             foreach (char c in str)
@@ -66,12 +68,12 @@ namespace kakaoImti
                 if (root.children.ContainsKey(c))
                     root = root.children[c];
                 else
-                    return vList;
+                    return setList;
             }
 
-            vList = root.values;
+            setList = root.values;
 
-            return vList;
+            return setList;
         }
 
         public void AddData(int listIndex, List<String> keywordTexts)

@@ -42,8 +42,14 @@ namespace kakaoImti
         [DllImport("User32.dll")]
         public static extern IntPtr GetWindow(IntPtr hWnd, uint uCmd);
 
-        public const int WM_LBUTTONDOWN = 0x201;
-        public const int WM_LBUTTONUP = 0x202;
+        [DllImport("user32.dll")]
+        static extern int EnumWindows(EnumWindowsCallback lpEnumFunc, int lParam);
+
+        delegate bool EnumWindowsCallback(IntPtr hwnd, int lParam);
+
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
 
         public HandleManege()
         {
@@ -117,8 +123,21 @@ namespace kakaoImti
 
         private void ClickMessage(IntPtr hwnd, int x, int y)
         {
+            const int WM_LBUTTONDOWN = 0x201;
+            const int WM_LBUTTONUP = 0x202;
+
             PostMessage(hwnd, WM_LBUTTONDOWN, 0, MAKEPOINT(x, y));
             PostMessage(hwnd, WM_LBUTTONUP, 0, MAKEPOINT(x, y));
+        }
+
+        private void KeyBoardMessage(IntPtr hwnd)
+        {
+            const int WM_KEYDOWN = 0x0100;
+            const int WM_KEYUP = 0x0101;
+            const int VK_SPACE = 0x20;
+
+            PostMessage(hwnd, WM_KEYDOWN, VK_SPACE, 0);
+            PostMessage(hwnd, WM_KEYUP, VK_SPACE, 0);
         }
 
         public void ImageClick(int listIndex, int index)
@@ -147,9 +166,24 @@ namespace kakaoImti
             ////이모티콘 리스트 클릭
             Point first = new Point(29, 24);
             int maxWidthCnt = (listWindow.width - 14) / 38;
+            Console.WriteLine("{0} {1}",maxWidthCnt, listWindow.width);
+            ClickMessage(listWindow.wIndow, first.X + 38 * (listIndex % maxWidthCnt - 1) ,first.Y + 30 * (listIndex / maxWidthCnt));
+
+            ////이모티콘 클릭
+            Console.WriteLine(index);
+            first = new Point(45, 40);
+            maxWidthCnt = (imoticonWindow.width - 8) / 82;
+            ClickMessage(imoticonWindow.wIndow, first.X + 82 * (index % maxWidthCnt), first.Y + 75 * (index / maxWidthCnt));
 
 
-            ClickMessage(listWindow.wIndow, first.X + 40 * (listIndex % maxWidthCnt - 1) ,first.Y + 30 * (listIndex / maxWidthCnt));
+            ////스페이스바
+            SetForegroundWindow(EntireWindow.wIndow);
+            KeyBoardMessage(imoticonWindow.wIndow);
+
+
+
+            
+
 
         }
     }

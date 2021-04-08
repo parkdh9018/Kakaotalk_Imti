@@ -45,15 +45,19 @@ namespace kakaoImti
 
             keywordAnalysis.AddData(dataObject.listIndex, dataObject.kewordTexts);
 
-            for (int i = 0; i < dataObject.imageList.Count; i++)
-            {
-                PictureBox pictureBox = new PictureBox();
-                pictureBox.Image = dataObject.imageList[i];
-                pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
-                pictureBox.Click += new EventHandler((Handlesender,HandleE) 
-                    => image_click(Handlesender, HandleE, dataObject.listIndex,i));
-                pictureBoxes.Add(pictureBox);
-            }
+            //for (int i = 0; i < dataObject.imageList.Count; i++)
+            //{
+            //    //Console.WriteLine(i);
+
+            //    PictureBox pictureBox = new PictureBox();
+            //    pictureBox.Image = dataObject.imageList[i];
+            //    pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
+            //    pictureBox.Click += new EventHandler((Handlesender,HandleE) 
+            //        => image_click(Handlesender, HandleE, dataObject.listIndex,i));
+            //    pictureBoxes.Add(pictureBox);
+            //    ImagePanel.Controls.Add(pictureBox);
+
+            //}
 
         }
         private void button1_click(object sender, EventArgs e)
@@ -78,13 +82,26 @@ namespace kakaoImti
         {
             ImagePanel.Controls.Clear();
 
-            List<Value> values = keywordAnalysis.findIndex(searchBox.Text);
+            HashSet<Value> setValues = keywordAnalysis.findIndex(searchBox.Text);
+            List<Value> values = setValues.ToList();
 
-            //Console.WriteLine(values.Count);
+            Console.WriteLine("Count : {0}",values.Count);
 
-            for (int i = 0; i < values.Count; i++)           
-                ImagePanel.Controls.Add(pictureBoxes[values[i].index]);
-            
+
+            foreach(Value v in values)
+            {
+                PictureBox pictureBox = new PictureBox();
+                pictureBox.Image = dataObject.imageList[v.index];
+                pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
+                pictureBox.Click += new EventHandler((Handlesender, HandleE)
+                    => image_click(Handlesender, HandleE, v.listIndex, v.index));
+                pictureBoxes.Add(pictureBox);
+
+                ImagePanel.Controls.Add(pictureBox);
+            }
+
+
+
         }
 
         private void image_click(object sender, EventArgs e, int listIndex, int index)

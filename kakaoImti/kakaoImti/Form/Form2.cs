@@ -102,14 +102,13 @@ namespace kakaoImti
 
             int cnt = 0;
 
-            for (int i = 0; i < row; i++)
+            for (int i = 0; i < col; i++)
             {
-
                 Point firstPoint = new Point(0, 90);
 
-                for(int j = 0; j < col; j++)
+                for(int j = 0; j < row; j++)
                 {
-                    Rectangle rec = new Rectangle(firstPoint.X + d*i, firstPoint.Y + d*j, d, d);
+                    Rectangle rec = new Rectangle(firstPoint.X + d*j, firstPoint.Y + d*i, d, d);
                     e.Graphics.DrawRectangle(p,rec);
 
                     Bitmap bitmap = MainImage.Clone(rec, System.Drawing.Imaging.PixelFormat.DontCare);
