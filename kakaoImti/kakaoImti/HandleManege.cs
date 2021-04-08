@@ -99,7 +99,7 @@ namespace kakaoImti
 
 
 
-        private IntPtr getWindowOfProcess(string processName ,string className, string windowText)
+        public IntPtr getWindowOfProcess(string processName ,string className, string windowText)
         {            
             List<IntPtr> intPtrs = FindAllWindowEx(IntPtr.Zero, className, windowText);
 
@@ -139,6 +139,8 @@ namespace kakaoImti
             PostMessage(hwnd, WM_KEYDOWN, VK_SPACE, 0);
             PostMessage(hwnd, WM_KEYUP, VK_SPACE, 0);
         }
+
+
 
         public void ImageClick(int listIndex, int index)
         {
@@ -180,11 +182,8 @@ namespace kakaoImti
             SetForegroundWindow(EntireWindow.wIndow);
             KeyBoardMessage(imoticonWindow.wIndow);
 
-
-
-            
-
-
         }
+
+
     }
 }

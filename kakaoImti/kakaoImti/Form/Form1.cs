@@ -10,13 +10,6 @@ using System.Windows.Forms;
 
 namespace kakaoImti
 {
-    public struct RECT
-    {
-        public int left;
-        public int top;
-        public int right;
-        public int bottom;
-    }
 
     public partial class Form1 : Form
     {
@@ -25,15 +18,25 @@ namespace kakaoImti
         private DataObject dataObject;
         private KeywordAnalysis keywordAnalysis;
         private HandleManege handleManege;
+        private Timer timer;
 
         List<PictureBox> pictureBoxes;
 
         public Form1()
         {
             InitializeComponent();
+
+            this.ControlBox = false;
+
             pictureBoxes = new List<PictureBox>();
             handleManege = new HandleManege();
+
+            timer = new Timer();
+            timer.Interval = 1000;
+            timer.Tick += new EventHandler(timer_handler);
+            timer.Start();
         }
+
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -87,7 +90,6 @@ namespace kakaoImti
 
             Console.WriteLine("Count : {0}",values.Count);
 
-
             foreach(Value v in values)
             {
                 PictureBox pictureBox = new PictureBox();
@@ -100,13 +102,29 @@ namespace kakaoImti
                 ImagePanel.Controls.Add(pictureBox);
             }
 
-
-
         }
 
         private void image_click(object sender, EventArgs e, int listIndex, int index)
         {
             handleManege.ImageClick(listIndex, index);
+        }
+
+        private void timer_handler(object sender, EventArgs e)
+        {
+            Console.WriteLine("timer");
+
+            IntPtr talkBoxHandle = handleManege.getWindowOfProcess("KakaoTalk", "#32770", null);
+
+            if(talkBoxHandle != IntPtr.Zero)
+                this.Show();               
+            else
+                this.Hide();
+            
+        }
+
+        private void ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
