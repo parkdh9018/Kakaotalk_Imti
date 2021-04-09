@@ -15,7 +15,7 @@ namespace kakaoImti
     {
         private Bitmap bitmap;
         private DataSaveLoad dl;
-        private DataObject dataObject;
+        private List<DataObject> dataObjectList;
         private KeywordAnalysis keywordAnalysis;
         private HandleManege handleManege;
         private Timer timer;
@@ -44,23 +44,10 @@ namespace kakaoImti
             dl = new DataSaveLoad();
             keywordAnalysis = new KeywordAnalysis();
 
-            dataObject = dl.LoadData("케장1");
+            dataObjectList = dl.LoadData();
 
-            keywordAnalysis.AddData(dataObject.listIndex, dataObject.kewordTexts);
-
-            //for (int i = 0; i < dataObject.imageList.Count; i++)
-            //{
-            //    //Console.WriteLine(i);
-
-            //    PictureBox pictureBox = new PictureBox();
-            //    pictureBox.Image = dataObject.imageList[i];
-            //    pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
-            //    pictureBox.Click += new EventHandler((Handlesender,HandleE) 
-            //        => image_click(Handlesender, HandleE, dataObject.listIndex,i));
-            //    pictureBoxes.Add(pictureBox);
-            //    ImagePanel.Controls.Add(pictureBox);
-
-            //}
+            for(int i = 0; i < dataObjectList.Count; i++)
+                keywordAnalysis.AddData(i,dataObjectList[i].listIndex, dataObjectList[i].kewordTexts);
 
         }
         private void button1_click(object sender, EventArgs e)
@@ -88,12 +75,10 @@ namespace kakaoImti
             HashSet<Value> setValues = keywordAnalysis.findIndex(searchBox.Text);
             List<Value> values = setValues.ToList();
 
-            Console.WriteLine("Count : {0}",values.Count);
-
             foreach(Value v in values)
             {
                 PictureBox pictureBox = new PictureBox();
-                pictureBox.Image = dataObject.imageList[v.index];
+                pictureBox.Image = dataObjectList[v.dataIndex].imageList[v.index];
                 pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
                 pictureBox.Click += new EventHandler((Handlesender, HandleE)
                     => image_click(Handlesender, HandleE, v.listIndex, v.index));
@@ -111,20 +96,30 @@ namespace kakaoImti
 
         private void timer_handler(object sender, EventArgs e)
         {
-            Console.WriteLine("timer");
-
             IntPtr talkBoxHandle = handleManege.getWindowOfProcess("KakaoTalk", "#32770", null);
+            //WindowRect windowRect = new WindowRect(talkBoxHandle);
 
-            if(talkBoxHandle != IntPtr.Zero)
-                this.Show();               
+            if (talkBoxHandle != IntPtr.Zero)
+            {
+                //this.Location = new Point(windowRect.rect.left - 100, windowRect.rect.top);
+                this.Show();
+            }
             else
+            {
                 this.Hide();
-            
+            }
         }
 
         private void ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            notifyIcon.Visible = false;
             Application.Exit();
+        }
+
+        private void MenuItemFix_Click(object sender, EventArgs e)
+        {
+            Form3 form3 = new Form3();
+            form3.ShowDialog();
         }
     }
 }

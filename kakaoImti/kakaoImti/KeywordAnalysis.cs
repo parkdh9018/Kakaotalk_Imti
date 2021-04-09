@@ -9,6 +9,7 @@ namespace kakaoImti
 {
     struct Value
     {
+        public int dataIndex;
         public int listIndex;
         public int index;
     }
@@ -57,7 +58,6 @@ namespace kakaoImti
 
         }
 
-
         public HashSet<Value> findIndex(String str)
         {
             HashSet<Value> setList = new HashSet<Value>();
@@ -76,7 +76,7 @@ namespace kakaoImti
             return setList;
         }
 
-        public void AddData(int listIndex, List<String> keywordTexts)
+        public void AddData(int dataIndex, int listIndex, List<String> keywordTexts)
         {
 
             for(int i = 0; i < keywordTexts.Count; i++)
@@ -84,6 +84,7 @@ namespace kakaoImti
                 Value value = new Value();
                 value.index = i;
                 value.listIndex = listIndex;
+                value.dataIndex = dataIndex;
 
                 List<String> texts = keywordTexts[i].Split(',').ToList();
 
@@ -94,6 +95,7 @@ namespace kakaoImti
 
             }
         }
+
 
 
     }

@@ -39,9 +39,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pb = new System.Windows.Forms.PictureBox();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemFix = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -154,26 +155,34 @@
             this.pb.TabIndex = 0;
             this.pb.TabStop = false;
             // 
-            // notifyIcon1
+            // notifyIcon
             // 
-            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "카톡검색기";
-            this.notifyIcon1.Visible = true;
+            this.notifyIcon.ContextMenuStrip = this.contextMenuStrip1;
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "카톡검색기";
+            this.notifyIcon.Visible = true;
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItem});
+            this.MenuItemClose,
+            this.MenuItemFix});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
             // 
-            // ToolStripMenuItem
+            // MenuItemClose
             // 
-            this.ToolStripMenuItem.Name = "ToolStripMenuItem";
-            this.ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ToolStripMenuItem.Text = "종료";
-            this.ToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
+            this.MenuItemClose.Name = "MenuItemClose";
+            this.MenuItemClose.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemClose.Text = "종료";
+            this.MenuItemClose.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
+            // 
+            // MenuItemFix
+            // 
+            this.MenuItemFix.Name = "MenuItemFix";
+            this.MenuItemFix.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemFix.Text = "데이터 수정";
+            this.MenuItemFix.Click += new System.EventHandler(this.MenuItemFix_Click);
             // 
             // Form1
             // 
@@ -207,9 +216,10 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel ImagePanel;
         private System.Windows.Forms.TextBox searchBox;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemClose;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemFix;
     }
 }
 

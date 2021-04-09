@@ -40,39 +40,6 @@ namespace kakaoImti
 
         }
 
-
-        //}
-
-        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        //{
-        //    const int d = 10;
-        //    Point p;
-        //    switch (keyData)
-        //    {
-        //        case Keys.Right: // left arrow key
-        //            p = new Point(drawImage.Location.X + d, drawImage.Location.Y);
-        //            drawImage.Location = p;
-        //            return true;
-
-        //        case Keys.Left: // right arrow key
-        //            p = new Point(drawImage.Location.X - d, drawImage.Location.Y);
-        //            drawImage.Location = p;
-        //            return true;
-
-        //        case Keys.Up:
-        //            p = new Point(drawImage.Location.X, drawImage.Location.Y - d);
-        //            drawImage.Location = p;
-        //            return true;
-
-        //        case Keys.Down:
-        //            p = new Point(drawImage.Location.X, drawImage.Location.Y + d);
-        //            drawImage.Location = p;
-        //            return true;
-
-        //            // etc.
-        //    }
-        //    return base.ProcessCmdKey(ref msg, keyData);
-        //}
         void createElement()
         {
             Panel element = new Panel();
@@ -145,8 +112,9 @@ namespace kakaoImti
                     listTextBox.Select(textBox => textBox.Text).ToList()
                 );
 
-                ds.SaveData(dataObject);
-                this.Close(); 
+                ds.SaveData(dataObject, this.name.Text);
+
+
             }
         }
 
@@ -160,7 +128,38 @@ namespace kakaoImti
                 createElement();
 
         }
+
+        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        //{
+        //    const int d = 10;
+        //    Point p;
+        //    switch (keyData)
+        //    {
+        //        case Keys.Right: // left arrow key
+        //            p = new Point(drawImage.Location.X + d, drawImage.Location.Y);
+        //            drawImage.Location = p;
+        //            return true;
+
+        //        case Keys.Left: // right arrow key
+        //            p = new Point(drawImage.Location.X - d, drawImage.Location.Y);
+        //            drawImage.Location = p;
+        //            return true;
+
+        //        case Keys.Up:
+        //            p = new Point(drawImage.Location.X, drawImage.Location.Y - d);
+        //            drawImage.Location = p;
+        //            return true;
+
+        //        case Keys.Down:
+        //            p = new Point(drawImage.Location.X, drawImage.Location.Y + d);
+        //            drawImage.Location = p;
+        //            return true;
+
+        //            // etc.
+        //    }
+        //    return base.ProcessCmdKey(ref msg, keyData);
+        //}
     }
-    
-    
+
+
 }

@@ -65,30 +65,45 @@ namespace kakaoImti
     class DataSaveLoad
     {
         FileStream fs;
-        BinaryFormatter bf;
+        BinaryFormatter bf; 
 
-        public void SaveData(DataObject dataobject)
+        public void SaveData(DataObject dataobject, String DataName)
         {
+            var configure = Properties.Settings.Default;
+
+            if (!configure.MyCollection.Contains(DataName))
+            {
+                configure.MyCollection.Add(DataName);
+                configure.Save();
+            }
+                
             fs = new FileStream(dataobject.imoticonName+".dat", FileMode.Create);
             bf = new BinaryFormatter();
 
-
             bf.Serialize(fs, dataobject);
             fs.Close();
+
         }
 
-        public DataObject LoadData(String name)
+        public List<DataObject> LoadData()
         {
-            fs = new FileStream(name + ".dat", FileMode.Open);
-            bf = new BinaryFormatter();
+            List<DataObject> result = new List<DataObject>();
 
-            DataObject obj = (DataObject)bf.Deserialize(fs);
+            foreach (String name in Properties.Settings.Default.MyCollection)
+            {
+                Console.WriteLine("dataName : {0}", name);
+                fs = new FileStream(name + ".dat", FileMode.Open);
+                bf = new BinaryFormatter();
 
-            obj.getImage();
+                DataObject obj = (DataObject)bf.Deserialize(fs);
+                obj.getImage();
 
-            fs.Close();
+                result.Add(obj);
+                fs.Close();
+            }
 
-            return obj;
+
+            return result;
         }
     }
 }
