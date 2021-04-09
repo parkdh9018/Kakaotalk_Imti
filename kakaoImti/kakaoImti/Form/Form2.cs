@@ -40,27 +40,32 @@ namespace kakaoImti
 
         }
 
-        void createElement()
+        public void createBoxList(FlowLayoutPanel panel, int n)
         {
-            Panel element = new Panel();
-            element.Size = new Size(396, 113);
-            element.BorderStyle = BorderStyle.FixedSingle;
+            for(int i = 0; i < n; i++)
+            {
+                Panel element = new Panel();
+                element.Size = new Size(396, 113);
+                element.BorderStyle = BorderStyle.FixedSingle;
 
-            PictureBox picture = new PictureBox();
-            picture.Size = new Size(d, d);
-            picture.Location = new Point(9, 9);
-            picture.BorderStyle = BorderStyle.FixedSingle;
-            listPicture.Add(picture);
+                PictureBox picture = new PictureBox();
+                picture.Size = new Size(d, d);
+                picture.Location = new Point(9, 9);
+                picture.BorderStyle = BorderStyle.FixedSingle;
+                listPicture.Add(picture);
 
-            TextBox text = new TextBox();
-            text.Size = new Size(166,21);
-            text.Location = new Point(131,42);
-            listTextBox.Add(text);
+                TextBox text = new TextBox();
+                text.Size = new Size(166, 21);
+                text.Location = new Point(131, 42);
+                listTextBox.Add(text);
 
-            element.Controls.Add(picture);
-            element.Controls.Add(text);
+                element.Controls.Add(picture);
+                element.Controls.Add(text);
 
-            panel2.Controls.Add(element);
+                panel.Controls.Add(element);
+            }
+
+
         }
         private void backImage_Paint(object sender, PaintEventArgs e)
         {
@@ -112,8 +117,8 @@ namespace kakaoImti
                     listTextBox.Select(textBox => textBox.Text).ToList()
                 );
 
-                ds.SaveData(dataObject, this.name.Text);
-
+                ds.SaveData(dataObject);
+                this.Close();
 
             }
         }
@@ -124,8 +129,7 @@ namespace kakaoImti
             ListPanel.Add(panel2);
             ListPanel[index].BringToFront();
 
-            for (int i = 0; i < row * col; i++)
-                createElement();
+            createBoxList(panel2,row * col);
 
         }
 

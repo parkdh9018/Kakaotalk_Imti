@@ -67,9 +67,10 @@ namespace kakaoImti
         FileStream fs;
         BinaryFormatter bf; 
 
-        public void SaveData(DataObject dataobject, String DataName)
+        public void SaveData(DataObject dataobject)
         {
             var configure = Properties.Settings.Default;
+            String DataName = dataobject.imoticonName;
 
             if (!configure.MyCollection.Contains(DataName))
             {
