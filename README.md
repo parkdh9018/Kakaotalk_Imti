@@ -3,7 +3,8 @@
 
 검색
 -----
-![imoticonSearch_1](https://user-images.githubusercontent.com/22982297/114215153-35b7ff00-99a0-11eb-8d5b-48601a9bf12d.gif)
+![imoticonSearch_2](https://user-images.githubusercontent.com/22982297/114216032-50d73e80-99a1-11eb-8e28-e4ee76ee6a4a.gif)
+
 
 이미지 저장
 -----
