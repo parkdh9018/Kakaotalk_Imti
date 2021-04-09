@@ -13,11 +13,13 @@ namespace kakaoImti
 {
     public partial class Form2 : Form
     {
-        int d = 84;
+        int imoticonWIdth = 75;
+        int imoticonHeight = 75;
 
         int index = 0;
-        int row = 4;
-        int col = 6;
+        int row;
+        int col;
+        int limitnum;
 
         Bitmap MainImage;
         List<PictureBox> listPicture;
@@ -25,18 +27,23 @@ namespace kakaoImti
 
         List<Panel> ListPanel = new List<Panel>();
 
-        public Form2(Bitmap bitmap = null)
+        public Form2(Bitmap bitmap)
         {
             InitializeComponent();
 
             listPicture = new List<PictureBox>();
             listTextBox = new List<TextBox>();
 
-            if (bitmap != null)
-            {
-                backImage.Image = bitmap;
-                MainImage = bitmap;
-            }
+            backImage.Image = bitmap;
+            MainImage = bitmap;
+
+            row = (MainImage.Width - 9) / imoticonWIdth;
+            col = MainImage.Height / imoticonHeight;
+            limitnum = row * col;
+
+            createBoxList(panel2, limitnum);
+
+            LimitCntTextBox.Text = limitnum.ToString();
 
         }
 
@@ -49,7 +56,7 @@ namespace kakaoImti
                 element.BorderStyle = BorderStyle.FixedSingle;
 
                 PictureBox picture = new PictureBox();
-                picture.Size = new Size(d, d);
+                picture.Size = new Size(imoticonWIdth, imoticonHeight);
                 picture.Location = new Point(9, 9);
                 picture.BorderStyle = BorderStyle.FixedSingle;
                 listPicture.Add(picture);
@@ -67,25 +74,30 @@ namespace kakaoImti
 
 
         }
+
+
+
         private void backImage_Paint(object sender, PaintEventArgs e)
         {
-
             Pen p = new Pen(Color.Blue, 1);
 
             int cnt = 0;
 
             for (int i = 0; i < col; i++)
             {
-                Point firstPoint = new Point(0, 90);
+                Point firstPoint = new Point(9, 0);
 
                 for(int j = 0; j < row; j++)
                 {
-                    Rectangle rec = new Rectangle(firstPoint.X + d*j, firstPoint.Y + d*i, d, d);
+                    if (cnt >= limitnum )
+                        return;
+
+                    Rectangle rec = new Rectangle(firstPoint.X + (imoticonWIdth + 5)*j, firstPoint.Y + (imoticonHeight + 8)*i, imoticonWIdth, imoticonHeight);
+
                     e.Graphics.DrawRectangle(p,rec);
 
                     Bitmap bitmap = MainImage.Clone(rec, System.Drawing.Imaging.PixelFormat.DontCare);
                     listPicture[cnt++].Image = bitmap;
-
                 }
 
             }
@@ -129,40 +141,25 @@ namespace kakaoImti
             ListPanel.Add(panel2);
             ListPanel[index].BringToFront();
 
-            createBoxList(panel2,row * col);
 
         }
 
-        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        //{
-        //    const int d = 10;
-        //    Point p;
-        //    switch (keyData)
-        //    {
-        //        case Keys.Right: // left arrow key
-        //            p = new Point(drawImage.Location.X + d, drawImage.Location.Y);
-        //            drawImage.Location = p;
-        //            return true;
+        private void LimitCntTextBox_TextChanged(object sender, EventArgs e)
+        {
+            int num;
+            Int32.TryParse(LimitCntTextBox.Text, out num);
 
-        //        case Keys.Left: // right arrow key
-        //            p = new Point(drawImage.Location.X - d, drawImage.Location.Y);
-        //            drawImage.Location = p;
-        //            return true;
+            if(0 < num && num <= row * col)
+            {
+                //draw
+                limitnum = num;
 
-        //        case Keys.Up:
-        //            p = new Point(drawImage.Location.X, drawImage.Location.Y - d);
-        //            drawImage.Location = p;
-        //            return true;
+                panel2.Controls.Clear();
+                createBoxList(panel2, limitnum);
+                backImage.Image = MainImage;
 
-        //        case Keys.Down:
-        //            p = new Point(drawImage.Location.X, drawImage.Location.Y + d);
-        //            drawImage.Location = p;
-        //            return true;
-
-        //            // etc.
-        //    }
-        //    return base.ProcessCmdKey(ref msg, keyData);
-        //}
+            }
+        }
     }
 
 

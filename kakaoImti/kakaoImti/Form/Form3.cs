@@ -21,7 +21,8 @@ namespace kakaoImti
         TabPage firstPage;
 
         int listIndex;
-        int d = 84;
+        int imoticonWIdth = 82;
+        int imoticonHeight = 82;
 
         public Form3()
         {
@@ -75,7 +76,7 @@ namespace kakaoImti
                 element.BorderStyle = BorderStyle.FixedSingle;
 
                 PictureBox picture = new PictureBox();
-                picture.Size = new Size(d, d);
+                picture.Size = new Size(imoticonWIdth, imoticonHeight);
                 picture.Location = new Point(9, 9);
                 picture.BorderStyle = BorderStyle.FixedSingle;
                 picture.Image = dataObject.imageList[i];

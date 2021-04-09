@@ -50,12 +50,6 @@ namespace kakaoImti
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
-
-        public HandleManege()
-        {
-
-        }
-
         private int MAKEPOINT(int x, int y)
         {
             return ((y << 16) | (x & 0xFFFF));
@@ -81,15 +75,33 @@ namespace kakaoImti
 
         public Bitmap ImoticonWindowLoad()
         {
-            Thread.Sleep(3000);
+            ////////////////이전방법
+            //Thread.Sleep(3000);
 
-            WindowRect imoticonWindow = new WindowRect();
-            imoticonWindow.setWindow(FindWindowEx(FindWindow("EVA_Window_Dblclk", null), IntPtr.Zero, "EVA_ChildWindow", null));
+            //WindowRect imoticonWindow = new WindowRect();
+            //imoticonWindow.setWindow(FindWindowEx(FindWindow("EVA_Window_Dblclk", null), IntPtr.Zero, "EVA_ChildWindow", null));
 
-            if (imoticonWindow.width == 0 || imoticonWindow.height == 0)
-                return new Bitmap(1, 1);
+            //if (imoticonWindow.width == 0 || imoticonWindow.height == 0)
+            //    return new Bitmap(1, 1);
+
+            //Bitmap bitmap = new Bitmap(imoticonWindow.width, imoticonWindow.height);
+            //Graphics graphics = Graphics.FromImage(bitmap);
+
+            //graphics.CopyFromScreen(imoticonWindow.rect.left, imoticonWindow.rect.top, 0, 0, bitmap.Size);
+
+            WindowRect EntireWindow = getEntireImoticonWIndow();
+
+            ////이모티콘 탭 클릭
+            ClickMessage(EntireWindow.wIndow, EntireWindow.width / 4 + 50, 40);
+
+            Thread.Sleep(200);
+
+            WindowRect childWindow = new WindowRect(FindWindowEx(EntireWindow.wIndow, IntPtr.Zero, "EVA_ChildWindow", null));
+            WindowRect listWindow = new WindowRect(FindWindowEx(childWindow.wIndow, IntPtr.Zero, "EVA_ChildWindow_Dblclk", null));
+            WindowRect imoticonWindow = new WindowRect(FindWindowEx(childWindow.wIndow, listWindow.wIndow, "EVA_ChildWindow_Dblclk", null));
 
             Bitmap bitmap = new Bitmap(imoticonWindow.width, imoticonWindow.height);
+
             Graphics graphics = Graphics.FromImage(bitmap);
 
             graphics.CopyFromScreen(imoticonWindow.rect.left, imoticonWindow.rect.top, 0, 0, bitmap.Size);
@@ -97,6 +109,21 @@ namespace kakaoImti
             return bitmap;
         }
 
+        
+        public WindowRect getEntireImoticonWIndow()
+        {
+            WindowRect talkBoxWindow = new WindowRect();
+            talkBoxWindow.setWindow(getWindowOfProcess("KakaoTalk", "#32770", null));
+
+            ////이모티콘 창 클릭
+            ClickMessage(talkBoxWindow.wIndow, 20, talkBoxWindow.height - 20);
+
+            Thread.Sleep(200);
+
+            WindowRect EntireWindow = new WindowRect(FindAllWindowEx(IntPtr.Zero, "EVA_Window_Dblclk", null)[1]);
+
+            return EntireWindow;
+        }
 
 
         public IntPtr getWindowOfProcess(string processName ,string className, string windowText)
@@ -144,16 +171,7 @@ namespace kakaoImti
 
         public void ImageClick(int listIndex, int index)
         {
-
-            WindowRect talkBoxWindow = new WindowRect();
-            talkBoxWindow.setWindow(getWindowOfProcess("KakaoTalk", "#32770", null));
-
-            ////이모티콘 창 클릭
-            ClickMessage(talkBoxWindow.wIndow, 20, talkBoxWindow.height - 20);
-
-            Thread.Sleep(200);
-
-            WindowRect EntireWindow = new WindowRect(FindAllWindowEx(IntPtr.Zero, "EVA_Window_Dblclk", null)[1]);
+            WindowRect EntireWindow = getEntireImoticonWIndow();
 
             ////이모티콘 탭 클릭
             ClickMessage(EntireWindow.wIndow, EntireWindow.width / 4 + 50, 40);
@@ -172,7 +190,6 @@ namespace kakaoImti
             ClickMessage(listWindow.wIndow, first.X + 38 * (listIndex % maxWidthCnt - 1) ,first.Y + 30 * (listIndex / maxWidthCnt));
 
             ////이모티콘 클릭
-            Console.WriteLine(index);
             first = new Point(45, 40);
             maxWidthCnt = (imoticonWindow.width - 8) / 82;
             ClickMessage(imoticonWindow.wIndow, first.X + 82 * (index % maxWidthCnt), first.Y + 75 * (index / maxWidthCnt));
