@@ -26,7 +26,7 @@ namespace kakaoImti
         {
             InitializeComponent();
 
-            this.ControlBox = false;
+            //this.ControlBox = false;
 
             pictureBoxes = new List<PictureBox>();
             handleManege = new HandleManege();
@@ -102,6 +102,7 @@ namespace kakaoImti
             if (talkBoxHandle != IntPtr.Zero)
             {
                 //this.Location = new Point(windowRect.rect.left - 100, windowRect.rect.top);
+                
                 this.Show();
             }
             else
@@ -120,6 +121,11 @@ namespace kakaoImti
         {
             Form3 form3 = new Form3();
             form3.ShowDialog();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            timer.Stop();
         }
     }
 }
