@@ -168,19 +168,19 @@
             this.MenuItemClose,
             this.MenuItemFix});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(139, 48);
             // 
             // MenuItemClose
             // 
             this.MenuItemClose.Name = "MenuItemClose";
-            this.MenuItemClose.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemClose.Size = new System.Drawing.Size(138, 22);
             this.MenuItemClose.Text = "종료";
             this.MenuItemClose.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
             // 
             // MenuItemFix
             // 
             this.MenuItemFix.Name = "MenuItemFix";
-            this.MenuItemFix.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemFix.Size = new System.Drawing.Size(138, 22);
             this.MenuItemFix.Text = "데이터 수정";
             this.MenuItemFix.Click += new System.EventHandler(this.MenuItemFix_Click);
             // 
@@ -190,8 +190,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(379, 301);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "이모티콘 검색기";
             this.TransparencyKey = System.Drawing.Color.DarkGreen;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);

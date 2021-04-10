@@ -100,6 +100,9 @@ namespace kakaoImti
             WindowRect listWindow = new WindowRect(FindWindowEx(childWindow.wIndow, IntPtr.Zero, "EVA_ChildWindow_Dblclk", null));
             WindowRect imoticonWindow = new WindowRect(FindWindowEx(childWindow.wIndow, listWindow.wIndow, "EVA_ChildWindow_Dblclk", null));
 
+            if (imoticonWindow.width == 0 || imoticonWindow.height == 0)
+                return new Bitmap(1, 1);
+
             Bitmap bitmap = new Bitmap(imoticonWindow.width, imoticonWindow.height);
 
             Graphics graphics = Graphics.FromImage(bitmap);
@@ -186,7 +189,11 @@ namespace kakaoImti
             ////이모티콘 리스트 클릭
             Point first = new Point(29, 24);
             int maxWidthCnt = (listWindow.width - 14) / 38;
-            Console.WriteLine("{0} {1}",maxWidthCnt, listWindow.width);
+            //Console.WriteLine("{0} {1}",maxWidthCnt, listWindow.width);
+
+            if (maxWidthCnt == 0)
+                return;
+
             ClickMessage(listWindow.wIndow, first.X + 38 * (listIndex % maxWidthCnt - 1) ,first.Y + 30 * (listIndex / maxWidthCnt));
 
             ////이모티콘 클릭

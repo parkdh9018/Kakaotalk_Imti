@@ -55,7 +55,7 @@ namespace kakaoImti
             Bitmap bitmap = handleManege.ImoticonWindowLoad();
 
             if (bitmap.Size.Height == 1 || bitmap.Size.Width == 1)
-                MessageBox.Show("창이 없습니다.");
+                MessageBox.Show("다시 시도해주세요");
 
             pb.Image = bitmap;
             this.bitmap = bitmap;
