@@ -15,6 +15,8 @@ namespace kakaoImti
     {
         int imoticonWIdth = 75;
         int imoticonHeight = 75;
+        int widthSpace = 5;
+        int heightSpace = 8;
 
         int index = 0;
         int row;
@@ -31,14 +33,13 @@ namespace kakaoImti
         {
             InitializeComponent();
 
-            listPicture = new List<PictureBox>();
             listTextBox = new List<TextBox>();
 
             backImage.Image = bitmap;
             MainImage = bitmap;
 
-            row = (MainImage.Width - 9) / imoticonWIdth;
-            col = MainImage.Height / imoticonHeight;
+            row = (MainImage.Width - 9) / (imoticonWIdth + widthSpace);
+            col = MainImage.Height / (imoticonHeight + heightSpace);
             limitnum = row * col;
 
             createBoxList(panel2, limitnum);
@@ -49,7 +50,9 @@ namespace kakaoImti
 
         public void createBoxList(FlowLayoutPanel panel, int n)
         {
-            for(int i = 0; i < n; i++)
+            listPicture = new List<PictureBox>();
+
+            for (int i = 0; i < n; i++)
             {
                 Panel element = new Panel();
                 element.Size = new Size(396, 113);
@@ -92,7 +95,7 @@ namespace kakaoImti
                     if (cnt >= limitnum )
                         return;
 
-                    Rectangle rec = new Rectangle(firstPoint.X + (imoticonWIdth + 5)*j, firstPoint.Y + (imoticonHeight + 8)*i, imoticonWIdth, imoticonHeight);
+                    Rectangle rec = new Rectangle(firstPoint.X + (imoticonWIdth + widthSpace) *j, firstPoint.Y + (imoticonHeight + heightSpace) *i, imoticonWIdth, imoticonHeight);
 
                     e.Graphics.DrawRectangle(p,rec);
 
