@@ -86,6 +86,8 @@ namespace kakaoImti
                 value.listIndex = listIndex;
                 value.dataIndex = dataIndex;
 
+                Console.WriteLine("{0} {1} {2}", value.dataIndex, value.listIndex, value.index);
+
                 List<String> texts = keywordTexts[i].Split(',').ToList();
 
                 foreach(String text in texts)

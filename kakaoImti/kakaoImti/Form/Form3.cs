@@ -21,15 +21,13 @@ namespace kakaoImti
         TabPage firstPage;
 
         int listIndex;
-        int imoticonWIdth = 82;
-        int imoticonHeight = 82;
+        int imoticonWIdth = 75;
+        int imoticonHeight = 75;
 
         public Form3()
         {
             InitializeComponent();
 
-            listPicture = new List<PictureBox>();
-            listTextBox = new List<TextBox>();
             dataSaveLoad = new DataSaveLoad();
 
             dataObjectList = dataSaveLoad.LoadData();

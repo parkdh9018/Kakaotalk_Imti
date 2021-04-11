@@ -115,11 +115,13 @@ namespace kakaoImti
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             timer.Stop();
+            Application.Exit();
+
         }
 
         private void Form1_Activated(object sender, EventArgs e)
         {   
-            Console.WriteLine("active");
+            //Console.WriteLine("active");
 
             if (Program.saveEventCheck)
             {

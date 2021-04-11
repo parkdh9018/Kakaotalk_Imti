@@ -174,6 +174,7 @@ namespace kakaoImti
 
         public void ImageClick(int listIndex, int index)
         {
+            listIndex -= 1;
             WindowRect EntireWindow = getEntireImoticonWIndow();
 
             ////이모티콘 탭 클릭
@@ -189,12 +190,12 @@ namespace kakaoImti
             ////이모티콘 리스트 클릭
             Point first = new Point(29, 24);
             int maxWidthCnt = (listWindow.width - 14) / 38;
-            //Console.WriteLine("{0} {1}",maxWidthCnt, listWindow.width);
 
+            // 창 못찾으면 종료
             if (maxWidthCnt == 0)
                 return;
 
-            ClickMessage(listWindow.wIndow, first.X + 38 * (listIndex % maxWidthCnt - 1) ,first.Y + 30 * (listIndex / maxWidthCnt));
+            ClickMessage(listWindow.wIndow, first.X + 38 * (listIndex % maxWidthCnt) ,first.Y + 30 * (listIndex / maxWidthCnt));
 
             ////이모티콘 클릭
             first = new Point(45, 40);

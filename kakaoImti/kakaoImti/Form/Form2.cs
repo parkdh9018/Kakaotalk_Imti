@@ -33,8 +33,6 @@ namespace kakaoImti
         {
             InitializeComponent();
 
-            listTextBox = new List<TextBox>();
-
             backImage.Image = bitmap;
             MainImage = bitmap;
 
@@ -50,6 +48,7 @@ namespace kakaoImti
 
         public void createBoxList(FlowLayoutPanel panel, int n)
         {
+            listTextBox = new List<TextBox>();
             listPicture = new List<PictureBox>();
 
             for (int i = 0; i < n; i++)
