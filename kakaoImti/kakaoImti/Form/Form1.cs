@@ -64,14 +64,17 @@ namespace kakaoImti
 
             foreach(Value v in values)
             {
-
                 Console.WriteLine("{0} {1} {2}", v.dataIndex, v.listIndex, v.index);
 
+                DataObject data = dataObjectList[v.dataIndex];
+
                 PictureBox pictureBox = new PictureBox();
-                pictureBox.Image = dataObjectList[v.dataIndex].imageList[v.index];
+                pictureBox.Image = data.imageList[v.index];
                 pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
-                pictureBox.Click += new EventHandler((Handlesender, HandleE)
-                    => image_click(Handlesender, HandleE, v.listIndex, v.index));
+                pictureBox.MouseHover += new EventHandler((mySender, myE) 
+                    => Picture_hover(mySender, myE, data.kewordTexts[v.index]));
+                pictureBox.Click += new EventHandler((mySender, myE)
+                    => image_click(mySender, myE, v.listIndex, v.index));
                 pictureBoxes.Add(pictureBox);
 
                 ImagePanel.Controls.Add(pictureBox);
@@ -127,8 +130,7 @@ namespace kakaoImti
             {
                 dl = new DataSaveLoad();
                 keywordAnalysis = new KeywordAnalysis();
-
-                
+        
                 dataObjectList = dl.LoadData();
 
                 for (int i = 0; i < dataObjectList.Count; i++)
@@ -138,6 +140,15 @@ namespace kakaoImti
 
             }
             
+        }
+
+        private void Picture_hover(object sender, EventArgs e, String str)
+        {
+            PictureBox picture = (PictureBox)sender;
+
+            ToolTip toolTip = new ToolTip();
+            toolTip.IsBalloon = true;
+            toolTip.SetToolTip(picture, str);
         }
     }
 }
