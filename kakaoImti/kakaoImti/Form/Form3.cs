@@ -62,6 +62,10 @@ namespace kakaoImti
         {
             listIndex = dataObject.listIndex;
 
+            listPicture = new List<PictureBox>();
+            listTextBox = new List<TextBox>();
+            tabPage.Controls.Clear();
+
             FlowLayoutPanel flowLayout = new FlowLayoutPanel();
             flowLayout.Dock = DockStyle.Fill;
             flowLayout.FlowDirection = FlowDirection.TopDown;
@@ -107,6 +111,8 @@ namespace kakaoImti
                 new DataObject(name,listIndex,
                 listPicture.Select(picture => picture.Image).ToList(),
                 listTextBox.Select(textbox => textbox.Text).ToList()));
+
+            Program.saveEventCheck = true;
 
             this.Close();
         }

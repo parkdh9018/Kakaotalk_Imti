@@ -5,6 +5,8 @@ namespace kakaoImti
 {
     class Program
     {
+        public static bool saveEventCheck = true;
+
         [STAThread]
         static void Main()
         {

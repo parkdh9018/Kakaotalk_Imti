@@ -124,6 +124,7 @@ namespace kakaoImti
             {
                 DataSaveLoad ds = new DataSaveLoad();
 
+
                 DataObject dataObject = new DataObject
                 (
                     this.name.Text,
@@ -133,6 +134,9 @@ namespace kakaoImti
                 );
 
                 ds.SaveData(dataObject);
+
+                Program.saveEventCheck = true;
+
                 this.Close();
 
             }

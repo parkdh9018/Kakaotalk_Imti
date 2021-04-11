@@ -37,19 +37,6 @@ namespace kakaoImti
             timer.Start();
         }
 
-
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            dl = new DataSaveLoad();
-            keywordAnalysis = new KeywordAnalysis();
-
-            dataObjectList = dl.LoadData();
-
-            for(int i = 0; i < dataObjectList.Count; i++)
-                keywordAnalysis.AddData(i,dataObjectList[i].listIndex, dataObjectList[i].kewordTexts);
-
-        }
         private void button1_click(object sender, EventArgs e)
         {
             Bitmap bitmap = handleManege.ImoticonWindowLoad();
@@ -77,6 +64,9 @@ namespace kakaoImti
 
             foreach(Value v in values)
             {
+
+                Console.WriteLine("{0} {1} {2}", v.dataIndex, v.listIndex, v.index);
+
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Image = dataObjectList[v.dataIndex].imageList[v.index];
                 pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -101,8 +91,7 @@ namespace kakaoImti
 
             if (talkBoxHandle != IntPtr.Zero)
             {
-                //this.Location = new Point(windowRect.rect.left - 100, windowRect.rect.top);
-                
+                //this.Location = new Point(windowRect.rect.left - 100, windowRect.rect.top);               
                 this.Show();
             }
             else
@@ -126,6 +115,27 @@ namespace kakaoImti
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             timer.Stop();
+        }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {   
+            Console.WriteLine("active");
+
+            if (Program.saveEventCheck)
+            {
+                dl = new DataSaveLoad();
+                keywordAnalysis = new KeywordAnalysis();
+
+                
+                dataObjectList = dl.LoadData();
+
+                for (int i = 0; i < dataObjectList.Count; i++)
+                    keywordAnalysis.AddData(i, dataObjectList[i].listIndex, dataObjectList[i].kewordTexts);
+
+                Program.saveEventCheck = false;
+
+            }
+            
         }
     }
 }

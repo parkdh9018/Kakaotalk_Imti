@@ -194,8 +194,8 @@
             this.Name = "Form1";
             this.Text = "이모티콘 검색기";
             this.TransparencyKey = System.Drawing.Color.DarkGreen;
+            this.Activated += new System.EventHandler(this.Form1_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
